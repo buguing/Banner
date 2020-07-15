@@ -6,7 +6,6 @@
 *   Adapter设计模式
 
 ## 依赖方式
-1. maven仓库
 *   项目的build.gradle文件添加
     
 ```
@@ -16,7 +15,7 @@ allprojects {
         }
 }
 ```
-*   implementation 'com.github.buguing:Banner:v2.0.0'
+*   implementation 'com.github.buguing:Banner:v2.0.1'
 
 ## 使用方法
 *   详见sample
@@ -25,3 +24,10 @@ allprojects {
 *   BannerView.getCurrentPosition();            获得当前图片的位置
 *   BannerView.startAutoRoll();                 开始滚动轮播图
 *   BannerView.stopAutoRoll();                  停止滚动轮播图
+
+
+## proguard
+```
+    -keep public class com.wellee.libbanner.**{*;}
+    -dontwarn com.wellee.libbanner.**
+```
