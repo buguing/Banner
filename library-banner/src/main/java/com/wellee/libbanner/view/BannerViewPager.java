@@ -2,8 +2,9 @@ package com.wellee.libbanner.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.animation.AccelerateInterpolator;
 
 import androidx.annotation.NonNull;
@@ -16,12 +17,8 @@ import com.wellee.libbanner.adapter.BannerPagerAdapter;
 import com.wellee.libbanner.scroller.BannerScroller;
 
 import java.lang.reflect.Field;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * BannerViewPager 轮播的ViewPager
@@ -36,8 +33,9 @@ public class BannerViewPager extends ViewPager {
      * 滚动速率 默认不反射修改
      */
     private int mScrollDuration;
-    private Disposable mDisposable;
     private BannerAdapter mAdapter;
+    private Timer mTimer;
+    private Handler mHandler;
 
 
     public BannerViewPager(@NonNull Context context) {
@@ -48,6 +46,11 @@ public class BannerViewPager extends ViewPager {
         super(context, attrs);
         initAttrs(attrs);
         setScrollDuration();
+        initHandler();
+    }
+
+    private void initHandler() {
+        mHandler = new Handler(Looper.getMainLooper());
     }
 
     public void setAttrs(AttributeSet attrs) {
@@ -105,20 +108,23 @@ public class BannerViewPager extends ViewPager {
         }
         // 这里防止重复订阅 很有必要
         stopAutoRoll();
-        mDisposable = Observable.interval(mInterval, mInterval, TimeUnit.MILLISECONDS)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        aLong -> setCurrentItem(getCurrentItem() + 1),
-                        e -> Log.e("BannerViewPager", Objects.requireNonNull(e.getMessage()))
-                );
+
+        mTimer = new Timer(true);
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                mHandler.post(() -> setCurrentItem(getCurrentItem() + 1));
+            }
+        }, mInterval, mInterval);
     }
 
     /**
      * 停止滚动
      */
     public void stopAutoRoll() {
-        if (mDisposable != null && !mDisposable.isDisposed()) {
-            mDisposable.dispose();
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
         }
     }
 }

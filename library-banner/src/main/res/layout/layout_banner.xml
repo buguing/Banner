@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        tools:background="@color/bottom_bg"
+        tools:background="@color/black"
         tools:padding="10dp">
 
         <TextView
@@ -22,10 +22,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize_18"
             tools:layout_alignParentStart="true"
-            tools:text="title" />
+            tools:text="title"
+            tools:textColor="@color/white"
+            tools:textSize="@dimen/textSize_18" />
 
         <LinearLayout
             android:id="@+id/banner_dot_container"

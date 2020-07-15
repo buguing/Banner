@@ -1,6 +1,5 @@
 package com.wellee.banner;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,32 +11,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.wellee.libbanner.adapter.BannerAdapter;
 import com.wellee.libbanner.view.BannerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.disposables.Disposable;
-
 public class BannerActivity extends AppCompatActivity {
 
-    private Disposable mDisposable;
     private BannerView mBannerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_banner);
-        RxPermissions rxPermissions = new RxPermissions(this);
-        mDisposable = rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-                .subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        initView();
-                        initData();
-                    }
-                });
+        initView();
+        initData();
     }
 
     private void initView() {
@@ -68,7 +57,7 @@ public class BannerActivity extends AppCompatActivity {
                 }
                 Glide.with(BannerActivity.this)
                         .load(images.get(position))
-                        .apply(new RequestOptions().placeholder(com.wellee.libbanner.R.drawable.default_picture))
+                        .apply(new RequestOptions().placeholder(R.drawable.default_picture))
                         .into(imageView);
                 return imageView;
             }
@@ -102,11 +91,4 @@ public class BannerActivity extends AppCompatActivity {
         mBannerView.stopAutoRoll();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mDisposable != null && !mDisposable.isDisposed()) {
-            mDisposable.dispose();
-        }
-    }
 }

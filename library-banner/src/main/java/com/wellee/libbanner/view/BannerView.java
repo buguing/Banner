@@ -78,9 +78,9 @@ public class BannerView extends RelativeLayout {
         mHideBottom = array.getBoolean(R.styleable.BannerView_hideBottom, false);
         mBottomHeight = array.getDimensionPixelSize(R.styleable.BannerView_bottomHeight, 0);
         mBottomPadding = array.getDimensionPixelSize(R.styleable.BannerView_bottomPadding, Utils.dp2px(getContext(), 10));
-        mBottomBgColor = array.getColor(R.styleable.BannerView_bottomBackgroundColor, ContextCompat.getColor(getContext(), R.color.bottom_bg));
+        mBottomBgColor = array.getColor(R.styleable.BannerView_bottomBackgroundColor, ContextCompat.getColor(getContext(), R.color.black));
         mIndicatorLocation = array.getInt(R.styleable.BannerView_indicatorLocation, 1);
-        mDotDrawableSelector = array.getResourceId(R.styleable.BannerView_dotDrawableSelector, R.drawable.arp_dot_bg_selector);
+        mDotDrawableSelector = array.getResourceId(R.styleable.BannerView_dotDrawableSelector, R.drawable.banner_dot_bg_selector);
         mDotSize = array.getDimensionPixelSize(R.styleable.BannerView_dotSize, Utils.dp2px(getContext(), 10));
         mDotMargin = array.getDimensionPixelSize(R.styleable.BannerView_dotMargin, Utils.dp2px(getContext(), 5));
         mTitleLocation = array.getInt(R.styleable.BannerView_titleLocation, -1);

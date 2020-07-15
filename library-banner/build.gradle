@@ -26,7 +26,5 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compileOnly deps.appcompat
-    compileOnly deps.rxjava
-    compileOnly deps.rxandroid
+    implementation deps.appcompat
 }
