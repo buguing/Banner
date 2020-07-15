@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -18,7 +18,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
@@ -26,11 +25,8 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation deps.appcompat
-    implementation deps.constraintlayout
-    implementation deps.glide
-    implementation deps.rxjava
-    implementation deps.rxpermissions
-    implementation project(':library-banner')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly deps.appcompat
+    compileOnly deps.rxjava
+    compileOnly deps.rxandroid
 }

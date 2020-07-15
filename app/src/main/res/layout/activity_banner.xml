@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.wellee.libbanner.view.BannerView
+        android:id="@+id/bv"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:interval="5000"
+        app:bottomBackgroundColor="@color/black"
+        app:bottomPadding="10dp"
+        app:indicatorLocation="right"
+        app:dotSize="10dp"
+        app:dotMargin="5dp"
+        app:dotDrawableSelector="@drawable/arp_dot_bg_selector"
+        app:titleLocation="left"
+        app:titleTextSize="@dimen/textSize_18"
+        app:titleTextColor="@color/white"/>
+
+</LinearLayout>

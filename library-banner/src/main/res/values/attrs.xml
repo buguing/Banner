@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="interval" format="integer" />
+    <attr name="scrollDuration" format="integer" />
+    <attr name="dotSize" format="dimension" />
+
+    <declare-styleable name="AutoRollPic">
+        <attr name="interval" />
+        <attr name="hideTitle" format="boolean" />
+        <attr name="indicatorAreaHeight" format="dimension" />
+        <attr name="indicatorBackground" format="color" />
+        <attr name="indicatorPaddingLeft" format="dimension" />
+        <attr name="indicatorPaddingRight" format="dimension" />
+        <attr name="textSize" format="dimension" />
+        <attr name="textColor" format="color" />
+        <attr name="dotSize" />
+        <attr name="dotSpace" format="dimension" />
+        <attr name="dotSelector" format="reference" />
+        <attr name="defaultPicture" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="BannerViewPager">
+        <attr name="interval" />
+        <attr name="scrollDuration" />
+    </declare-styleable>
+
+    <declare-styleable name="BannerView">
+        <attr name="interval" />
+        <attr name="scrollDuration" />
+        <attr name="hideBottom" format="boolean" />
+        <attr name="bottomHeight" format="dimension" />
+        <attr name="bottomPadding" format="dimension" />
+        <attr name="bottomBackgroundColor" format="color" />
+        <attr name="indicatorLocation" format="enum">
+            <enum name="left" value="-1" />
+            <enum name="center" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="dotDrawableSelector" format="reference" />
+        <attr name="dotSize" />
+        <attr name="dotMargin" format="dimension"/>
+        <attr name="titleLocation" format="enum">
+            <enum name="left" value="-1" />
+            <enum name="center" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="titleTextSize" format="dimension" />
+        <attr name="titleTextColor" format="color" />
+    </declare-styleable>
+</resources>
