@@ -31,6 +31,6 @@ dependencies {
     implementation deps.constraintlayout
     implementation deps.glide
     implementation deps.recyclerview
-    implementation project(':library-banner')
-//    implementation 'com.github.buguing:Banner:2.0.0'
+//    implementation project(':library-banner')
+    implementation 'com.github.buguing:Banner:2.0.3'
 }
