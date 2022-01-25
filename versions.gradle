@@ -24,7 +24,7 @@ ext.deps = deps
 
 
 def build_versions = [:]
-build_versions.min_sdk = 21
+build_versions.min_sdk = 19
 build_versions.target_sdk = 29
 build_versions.version_code = 4
 build_versions.version_name = "2.0.2"

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="interval" format="integer" />
-    <attr name="scrollDuration" format="integer" />
+    <attr name="bv_interval" format="integer" />
+    <attr name="bv_scrollDuration" format="integer" />
 
     <declare-styleable name="BannerViewPager">
-        <attr name="interval" />
-        <attr name="scrollDuration" />
+        <attr name="bv_interval" />
+        <attr name="bv_scrollDuration" />
     </declare-styleable>
 
     <declare-styleable name="BannerView">
-        <attr name="interval" />
-        <attr name="scrollDuration" />
-        <attr name="hideBottom" format="boolean" />
-        <attr name="hideIndicator" format="boolean" />
-        <attr name="canTouchToPause" format="boolean" />
-        <attr name="bottomHeight" format="dimension" />
-        <attr name="bottomPadding" format="dimension" />
-        <attr name="bottomBackgroundColor" format="color" />
-        <attr name="indicatorLocation" format="enum">
+        <attr name="bv_interval" />
+        <attr name="bv_scrollDuration" />
+        <attr name="bv_hideBottom" format="boolean" />
+        <attr name="bv_hideIndicator" format="boolean" />
+        <attr name="bv_canTouchToPause" format="boolean" />
+        <attr name="bv_bottomHeight" format="dimension" />
+        <attr name="bv_bottomPadding" format="dimension" />
+        <attr name="bv_bottomBackgroundColor" format="color" />
+        <attr name="bv_indicatorLocation" format="enum">
             <enum name="left" value="-1" />
             <enum name="center" value="0" />
             <enum name="right" value="1" />
         </attr>
-        <attr name="dotDrawableSelector" format="reference" />
-        <attr name="dotSize" format="dimension" />
-        <attr name="dotMargin" format="dimension" />
-        <attr name="titleLocation" format="enum">
-            <enum name="left" value="-1" />
-            <enum name="center" value="0" />
-            <enum name="right" value="1" />
+        <attr name="bv_dotDrawableSelector" format="reference" />
+        <attr name="bv_dotSize" format="dimension" />
+        <attr name="bv_dotMargin" format="dimension" />
+        <attr name="bv_titleLocation" format="enum">
+            <enum name="bv_left" value="-1" />
+            <enum name="bv_center" value="0" />
+            <enum name="bv_right" value="1" />
         </attr>
-        <attr name="titleTextSize" format="dimension" />
-        <attr name="titleTextColor" format="color" />
+        <attr name="bv_titleTextSize" format="dimension" />
+        <attr name="bv_titleTextColor" format="color" />
     </declare-styleable>
 </resources>

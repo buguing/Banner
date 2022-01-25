@@ -97,19 +97,19 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
 
     private void initAttrs(AttributeSet attrs) {
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.BannerView);
-        mHideBottom = array.getBoolean(R.styleable.BannerView_hideBottom, false);
-        mHideIndicator = array.getBoolean(R.styleable.BannerView_hideIndicator, false);
-        mCanTouchToPause = array.getBoolean(R.styleable.BannerView_canTouchToPause, true);
-        mBottomHeight = array.getDimensionPixelSize(R.styleable.BannerView_bottomHeight, 0);
-        mBottomPadding = array.getDimensionPixelSize(R.styleable.BannerView_bottomPadding, Utils.dp2px(getContext(), 10));
-        mBottomBgColor = array.getColor(R.styleable.BannerView_bottomBackgroundColor, ContextCompat.getColor(getContext(), R.color.black));
-        mIndicatorLocation = array.getInt(R.styleable.BannerView_indicatorLocation, 1);
-        mDotDrawableSelector = array.getResourceId(R.styleable.BannerView_dotDrawableSelector, R.drawable.banner_dot_bg_selector);
-        mDotSize = array.getDimensionPixelSize(R.styleable.BannerView_dotSize, Utils.dp2px(getContext(), 10));
-        mDotMargin = array.getDimensionPixelSize(R.styleable.BannerView_dotMargin, Utils.dp2px(getContext(), 5));
-        mTitleLocation = array.getInt(R.styleable.BannerView_titleLocation, -1);
-        mTitleTextSize = array.getDimensionPixelSize(R.styleable.BannerView_titleTextSize, Utils.sp2px(getContext(), 18));
-        mTitleTextColor = array.getColor(R.styleable.BannerView_titleTextColor, ContextCompat.getColor(getContext(), R.color.white));
+        mHideBottom = array.getBoolean(R.styleable.BannerView_bv_hideBottom, false);
+        mHideIndicator = array.getBoolean(R.styleable.BannerView_bv_hideIndicator, false);
+        mCanTouchToPause = array.getBoolean(R.styleable.BannerView_bv_canTouchToPause, true);
+        mBottomHeight = array.getDimensionPixelSize(R.styleable.BannerView_bv_bottomHeight, 0);
+        mBottomPadding = array.getDimensionPixelSize(R.styleable.BannerView_bv_bottomPadding, Utils.dp2px(getContext(), 10));
+        mBottomBgColor = array.getColor(R.styleable.BannerView_bv_bottomBackgroundColor, ContextCompat.getColor(getContext(), R.color.black));
+        mIndicatorLocation = array.getInt(R.styleable.BannerView_bv_indicatorLocation, 1);
+        mDotDrawableSelector = array.getResourceId(R.styleable.BannerView_bv_dotDrawableSelector, R.drawable.banner_dot_bg_selector);
+        mDotSize = array.getDimensionPixelSize(R.styleable.BannerView_bv_dotSize, Utils.dp2px(getContext(), 10));
+        mDotMargin = array.getDimensionPixelSize(R.styleable.BannerView_bv_dotMargin, Utils.dp2px(getContext(), 5));
+        mTitleLocation = array.getInt(R.styleable.BannerView_bv_titleLocation, -1);
+        mTitleTextSize = array.getDimensionPixelSize(R.styleable.BannerView_bv_titleTextSize, Utils.sp2px(getContext(), 18));
+        mTitleTextColor = array.getColor(R.styleable.BannerView_bv_titleTextColor, ContextCompat.getColor(getContext(), R.color.white));
         array.recycle();
     }
 

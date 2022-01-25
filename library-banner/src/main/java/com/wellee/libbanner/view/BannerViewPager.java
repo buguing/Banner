@@ -59,8 +59,8 @@ public class BannerViewPager extends ViewPager {
 
     private void initAttrs(AttributeSet attrs) {
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.BannerViewPager);
-        mInterval = array.getInt(R.styleable.BannerViewPager_interval, 2000);
-        mScrollDuration = array.getInt(R.styleable.BannerViewPager_scrollDuration, 0);
+        mInterval = array.getInt(R.styleable.BannerViewPager_bv_interval, 2000);
+        mScrollDuration = array.getInt(R.styleable.BannerViewPager_bv_scrollDuration, 0);
         array.recycle();
     }
 
