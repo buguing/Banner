@@ -1,5 +1,7 @@
 package com.wellee.libbanner.view;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -14,6 +16,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
 import androidx.viewpager.widget.ViewPager;
 
 import com.wellee.libbanner.R;
@@ -23,8 +29,9 @@ import com.wellee.libbanner.utils.Utils;
 /**
  * BannerView集成BannerViewPager、指示器、描述文字
  */
-public class BannerView extends RelativeLayout {
+public class BannerView extends RelativeLayout implements LifecycleObserver {
 
+    private static final String FRAGMENT_TAG = "lifecycle_fragment";
     private BannerViewPager mBannerVp;
     private TextView mBannerTvDesc;
     private LinearLayout mBannerDotContainer;
@@ -39,6 +46,11 @@ public class BannerView extends RelativeLayout {
     private GestureDetector mGestureDetector;
 
     private boolean mHideBottom;
+    private boolean mHideIndicator;
+    /**
+     * 触摸暂停
+     */
+    private boolean mCanTouchToPause;
     private int mBottomHeight;
     private int mBottomPadding;
     private int mBottomBgColor;
@@ -60,9 +72,19 @@ public class BannerView extends RelativeLayout {
 
     public BannerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        bindLifecycleFragment(context);
         inflate(context, R.layout.layout_banner, this);
         initAttrs(attrs);
         initView(attrs);
+    }
+
+    private void bindLifecycleFragment(Context context) {
+        if (context instanceof Activity) {
+            FragmentManager fm = ((Activity) context).getFragmentManager();
+            LifecycleFragment current = new LifecycleFragment();
+            current.getLifecycle().addObserver(this);
+            fm.beginTransaction().add(current, FRAGMENT_TAG).commitAllowingStateLoss();
+        }
     }
 
     @Override
@@ -76,6 +98,8 @@ public class BannerView extends RelativeLayout {
     private void initAttrs(AttributeSet attrs) {
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.BannerView);
         mHideBottom = array.getBoolean(R.styleable.BannerView_hideBottom, false);
+        mHideIndicator = array.getBoolean(R.styleable.BannerView_hideIndicator, false);
+        mCanTouchToPause = array.getBoolean(R.styleable.BannerView_canTouchToPause, true);
         mBottomHeight = array.getDimensionPixelSize(R.styleable.BannerView_bottomHeight, 0);
         mBottomPadding = array.getDimensionPixelSize(R.styleable.BannerView_bottomPadding, Utils.dp2px(getContext(), 10));
         mBottomBgColor = array.getColor(R.styleable.BannerView_bottomBackgroundColor, ContextCompat.getColor(getContext(), R.color.black));
@@ -132,6 +156,9 @@ public class BannerView extends RelativeLayout {
     }
 
     public void setAdapter(@NonNull BannerAdapter adapter) {
+        if (this.mAdapter != null) {
+            return;
+        }
         this.mAdapter = adapter;
         mBannerVp.setAdapter(adapter);
         // 初始化点
@@ -163,6 +190,9 @@ public class BannerView extends RelativeLayout {
         mBannerVp.setOnTouchListener((v, event) -> {
             // 分析触摸事件
             mGestureDetector.onTouchEvent(event);
+            if (!mCanTouchToPause) {
+                return false;
+            }
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     // 手指按下停止滚动
@@ -196,6 +226,18 @@ public class BannerView extends RelativeLayout {
         mBannerVp.stopAutoRoll();
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    void onResume() {
+        startAutoRoll();
+        Log.d("BannerView onResume", "startAutoRoll");
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    void onPause() {
+        stopAutoRoll();
+        Log.d("BannerView onPause", "stopAutoRoll");
+    }
+
     /**
      * 获取当前点击的位置
      *
@@ -209,14 +251,17 @@ public class BannerView extends RelativeLayout {
      * 动态添加指示器
      */
     private void initDotIndicator() {
-        for (int i = 0; i < mAdapter.getItemCount(); i++) {
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mDotSize, mDotSize);
-            params.leftMargin = params.rightMargin = mDotMargin;
-            View dotView = new View(getContext());
-            dotView.setLayoutParams(params);
-            dotView.setSelected(i == 0);
-            dotView.setBackgroundResource(mDotDrawableSelector);
-            mBannerDotContainer.addView(dotView);
+        if (!mHideIndicator) {
+            mBannerDotContainer.removeAllViews();
+            for (int i = 0; i < mAdapter.getItemCount(); i++) {
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mDotSize, mDotSize);
+                params.leftMargin = params.rightMargin = mDotMargin;
+                View dotView = new View(getContext());
+                dotView.setLayoutParams(params);
+                dotView.setSelected(i == 0);
+                dotView.setBackgroundResource(mDotDrawableSelector);
+                mBannerDotContainer.addView(dotView);
+            }
         }
     }
 
@@ -236,8 +281,10 @@ public class BannerView extends RelativeLayout {
     private void onSelectedItem(int position) {
         int realPosition = position % mAdapter.getItemCount();
         Log.e("onSelectedItem", "position = " + position + ", realPosition = " + realPosition);
-        mBannerDotContainer.getChildAt(mPrePosition).setSelected(false);
-        mBannerDotContainer.getChildAt(realPosition).setSelected(true);
+        if (!mHideIndicator) {
+            mBannerDotContainer.getChildAt(mPrePosition).setSelected(false);
+            mBannerDotContainer.getChildAt(realPosition).setSelected(true);
+        }
         mBannerTvDesc.setText(mAdapter.getItemDesc(realPosition));
         this.mPrePosition = realPosition;
     }

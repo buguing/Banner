@@ -91,9 +91,6 @@ public class BannerViewPager extends ViewPager {
     }
 
     public void setAdapter(@NonNull BannerAdapter adapter) {
-        if (mAdapter != null) {
-            throw new RuntimeException("must not be setAdapter twice");
-        }
         mAdapter = adapter;
         setAdapter(new BannerPagerAdapter(mAdapter));
 

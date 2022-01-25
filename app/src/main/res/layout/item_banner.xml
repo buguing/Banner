@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.wellee.libbanner.view.BannerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bv"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    app:bottomBackgroundColor="@color/black"
+    app:bottomPadding="10dp"
+    app:canTouchToPause="false"
+    app:dotDrawableSelector="@drawable/banner_dot_bg_selector"
+    app:dotMargin="5dp"
+    app:dotSize="10dp"
+    app:indicatorLocation="right"
+    app:interval="2000"
+    app:titleLocation="left"
+    app:titleTextColor="@color/white"
+    app:titleTextSize="@dimen/textSize_18" />

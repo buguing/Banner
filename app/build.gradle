@@ -30,6 +30,7 @@ dependencies {
     implementation deps.appcompat
     implementation deps.constraintlayout
     implementation deps.glide
+    implementation deps.recyclerview
     implementation project(':library-banner')
 //    implementation 'com.github.buguing:Banner:2.0.0'
 }

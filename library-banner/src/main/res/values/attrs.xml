@@ -12,6 +12,8 @@
         <attr name="interval" />
         <attr name="scrollDuration" />
         <attr name="hideBottom" format="boolean" />
+        <attr name="hideIndicator" format="boolean" />
+        <attr name="canTouchToPause" format="boolean" />
         <attr name="bottomHeight" format="dimension" />
         <attr name="bottomPadding" format="dimension" />
         <attr name="bottomBackgroundColor" format="color" />

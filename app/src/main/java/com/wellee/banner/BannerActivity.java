@@ -1,5 +1,6 @@
 package com.wellee.banner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,9 +36,9 @@ public class BannerActivity extends AppCompatActivity {
 
     private void initData() {
         final List<String> images = new ArrayList<>();
-        images.add("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3736505945,2891641029&fm=26&gp=0.jpg");
-        images.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594716584559&di=1a345db11cda02cc38f4f7e36f83fdb3&imgtype=0&src=http%3A%2F%2Fimg1.juimg.com%2F171022%2F330794-1G0221UZ753.jpg");
-        images.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1594716620842&di=cd5578c283f0e380bc9824a31f448c2b&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F140624%2F240455-14062406361053.jpg");
+        images.add("https://img0.baidu.com/it/u=3234506509,677321585&fm=26&fmt=auto&gp=0.jpg");
+        images.add("https://img2.baidu.com/it/u=2689069861,1551374965&fm=26&fmt=auto&gp=0.jpg");
+        images.add("https://img2.baidu.com/it/u=3008495258,294790728&fm=26&fmt=auto&gp=0.jpg");
 
         final List<String> descriptions = new ArrayList<>();
         descriptions.add("蓝天绿水");
@@ -79,16 +80,20 @@ public class BannerActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mBannerView.startAutoRoll();
+    public void toSecond(View view) {
+        startActivity(new Intent(this, SecondActivity.class));
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mBannerView.stopAutoRoll();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        mBannerView.startAutoRoll();
+//    }
+//
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        mBannerView.stopAutoRoll();
+//    }
 
 }
