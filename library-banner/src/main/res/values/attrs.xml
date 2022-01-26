@@ -12,6 +12,7 @@
         <attr name="bv_interval" />
         <attr name="bv_scrollDuration" />
         <attr name="bv_hideBottom" format="boolean" />
+        <attr name="bv_oneDataScroll" format="boolean" />
         <attr name="bv_hideIndicator" format="boolean" />
         <attr name="bv_canTouchToPause" format="boolean" />
         <attr name="bv_bottomHeight" format="dimension" />
