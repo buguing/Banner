@@ -172,6 +172,7 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
         initDesc();
         // 事件监听
         handleListener();
+        startAutoRoll();
     }
 
     private void handleListener() {
@@ -197,6 +198,10 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
             mGestureDetector.onTouchEvent(event);
             if (!mCanTouchToPause) {
                 return false;
+            }
+            if (!mOneDataScroll && getItemCount() < 2) {
+                // 设置一个不能滚动并且只有一个 不让其滚动
+                return true;
             }
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:

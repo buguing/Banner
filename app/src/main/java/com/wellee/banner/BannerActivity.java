@@ -37,13 +37,13 @@ public class BannerActivity extends AppCompatActivity {
     private void initData() {
         final List<String> images = new ArrayList<>();
         images.add("https://img0.baidu.com/it/u=3234506509,677321585&fm=26&fmt=auto&gp=0.jpg");
-//        images.add("https://img2.baidu.com/it/u=2689069861,1551374965&fm=26&fmt=auto&gp=0.jpg");
-//        images.add("https://img2.baidu.com/it/u=3008495258,294790728&fm=26&fmt=auto&gp=0.jpg");
+        images.add("https://img2.baidu.com/it/u=2689069861,1551374965&fm=26&fmt=auto&gp=0.jpg");
+        images.add("https://img2.baidu.com/it/u=3008495258,294790728&fm=26&fmt=auto&gp=0.jpg");
 
         final List<String> descriptions = new ArrayList<>();
         descriptions.add("蓝天绿水");
-//        descriptions.add("一叶扁舟");
-//        descriptions.add("浩瀚宇宙");
+        descriptions.add("一叶扁舟");
+        descriptions.add("浩瀚宇宙");
 
         mBannerView.setAdapter(new BannerAdapter() {
             @Override
