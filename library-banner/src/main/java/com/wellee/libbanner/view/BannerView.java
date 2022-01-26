@@ -220,9 +220,18 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
      * Fragment isVisibleToUser == true 开始
      */
     public void startAutoRoll() {
-        if (mOneDataScroll) {
-            mBannerVp.startAutoRoll();
+        if (!mOneDataScroll && getItemCount() < 2) {
+            // 设置了一个条目不滚动
+            return;
         }
+        mBannerVp.startAutoRoll();
+    }
+
+    private int getItemCount() {
+        if (mAdapter != null) {
+            return mAdapter.getItemCount();
+        }
+        return 0;
     }
 
     /**
@@ -260,7 +269,7 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
     private void initDotIndicator() {
         if (!mHideIndicator) {
             mBannerDotContainer.removeAllViews();
-            for (int i = 0; i < mAdapter.getItemCount(); i++) {
+            for (int i = 0; i < getItemCount(); i++) {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mDotSize, mDotSize);
                 params.leftMargin = params.rightMargin = mDotMargin;
                 View dotView = new View(getContext());
@@ -286,7 +295,7 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
      * @param position position
      */
     private void onSelectedItem(int position) {
-        int realPosition = position % mAdapter.getItemCount();
+        int realPosition = position % getItemCount();
         Log.e("onSelectedItem", "position = " + position + ", realPosition = " + realPosition);
         if (!mHideIndicator) {
             mBannerDotContainer.getChildAt(mPrePosition).setSelected(false);
