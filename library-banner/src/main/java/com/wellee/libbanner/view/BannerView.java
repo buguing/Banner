@@ -162,6 +162,8 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
 
     public void setAdapter(@NonNull BannerAdapter adapter) {
         if (this.mAdapter != null) {
+            this.mAdapter = adapter;
+            mBannerVp.setAdapter(adapter);
             return;
         }
         this.mAdapter = adapter;

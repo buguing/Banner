@@ -22,6 +22,8 @@ public class BannerActivity extends AppCompatActivity {
 
     private BannerView mBannerView;
 
+    private boolean flag = true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +42,18 @@ public class BannerActivity extends AppCompatActivity {
         images.add("https://img2.baidu.com/it/u=2689069861,1551374965&fm=26&fmt=auto&gp=0.jpg");
         images.add("https://img2.baidu.com/it/u=3008495258,294790728&fm=26&fmt=auto&gp=0.jpg");
 
+
         final List<String> descriptions = new ArrayList<>();
         descriptions.add("蓝天绿水");
         descriptions.add("一叶扁舟");
         descriptions.add("浩瀚宇宙");
+
+        final List<String> descriptions1 = new ArrayList<>();
+        descriptions1.add("哈哈");
+        descriptions1.add("嘎嘎");
+        descriptions1.add("嘿嘿");
+
+        final List<String> des = flag ? descriptions : descriptions1;
 
         mBannerView.setAdapter(new BannerAdapter() {
             @Override
@@ -70,7 +80,7 @@ public class BannerActivity extends AppCompatActivity {
 
             @Override
             public CharSequence getItemDesc(int position) {
-                return descriptions.get(position);
+                return des.get(position);
             }
         });
 
@@ -78,6 +88,11 @@ public class BannerActivity extends AppCompatActivity {
             int currentPosition = mBannerView.getCurrentPosition();
             Toast.makeText(this, "currentPosition = " + currentPosition, Toast.LENGTH_SHORT).show();
         });
+    }
+
+    public void changeData(View view) {
+        flag = !flag;
+        initData();
     }
 
     public void toSecond(View view) {

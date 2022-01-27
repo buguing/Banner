@@ -27,6 +27,18 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:background="@color/colorAccent"
+        android:onClick="changeData"
+        android:text="changeData"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@color/colorAccent"
         android:onClick="toSecond"
         android:text="SecondActivity"
         android:textAllCaps="false"
