@@ -38,21 +38,26 @@ public class BannerActivity extends AppCompatActivity {
 
     private void initData() {
         final List<String> images = new ArrayList<>();
+        final List<String> images1 = new ArrayList<>();
         images.add("https://img0.baidu.com/it/u=3234506509,677321585&fm=26&fmt=auto&gp=0.jpg");
-        images.add("https://img2.baidu.com/it/u=2689069861,1551374965&fm=26&fmt=auto&gp=0.jpg");
-        images.add("https://img2.baidu.com/it/u=3008495258,294790728&fm=26&fmt=auto&gp=0.jpg");
+//        images.add("https://img2.baidu.com/it/u=2689069861,1551374965&fm=26&fmt=auto&gp=0.jpg");
+//        images.add("https://img2.baidu.com/it/u=3008495258,294790728&fm=26&fmt=auto&gp=0.jpg");
 
+        images1.add("https://img0.baidu.com/it/u=3234506509,677321585&fm=26&fmt=auto&gp=0.jpg");
+        images1.add("https://img2.baidu.com/it/u=2689069861,1551374965&fm=26&fmt=auto&gp=0.jpg");
+        images1.add("https://img2.baidu.com/it/u=3008495258,294790728&fm=26&fmt=auto&gp=0.jpg");
 
         final List<String> descriptions = new ArrayList<>();
         descriptions.add("蓝天绿水");
-        descriptions.add("一叶扁舟");
-        descriptions.add("浩瀚宇宙");
+//        descriptions.add("一叶扁舟");
+//        descriptions.add("浩瀚宇宙");
 
         final List<String> descriptions1 = new ArrayList<>();
         descriptions1.add("哈哈");
         descriptions1.add("嘎嘎");
         descriptions1.add("嘿嘿");
 
+        final List<String> imgs = flag ? images : images1;
         final List<String> des = flag ? descriptions : descriptions1;
 
         mBannerView.setAdapter(new BannerAdapter() {
@@ -67,15 +72,18 @@ public class BannerActivity extends AppCompatActivity {
                     Log.e("getItemView", "复用了" + imageView);
                 }
                 Glide.with(BannerActivity.this)
-                        .load(images.get(position))
+                        .load(imgs.get(position))
                         .apply(new RequestOptions().placeholder(R.drawable.default_picture))
                         .into(imageView);
+                imageView.setOnClickListener(v -> {
+                    Toast.makeText(BannerActivity.this, "哈哈", Toast.LENGTH_SHORT).show();
+                });
                 return imageView;
             }
 
             @Override
             public int getItemCount() {
-                return images.size();
+                return imgs.size();
             }
 
             @Override

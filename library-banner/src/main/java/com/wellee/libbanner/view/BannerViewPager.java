@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.animation.AccelerateInterpolator;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,8 @@ public class BannerViewPager extends ViewPager {
     private BannerAdapter mAdapter;
     private Timer mTimer;
     private Handler mHandler;
+
+    private boolean isCanScroll;
 
 
     public BannerViewPager(@NonNull Context context) {
@@ -123,5 +126,14 @@ public class BannerViewPager extends ViewPager {
             mTimer.cancel();
             mTimer = null;
         }
+    }
+
+    public void setCanScroll(boolean canScroll) {
+        isCanScroll = canScroll;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return isCanScroll && super.onInterceptTouchEvent(ev);
     }
 }

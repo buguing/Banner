@@ -65,6 +65,7 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
     private int mTitleLocation;
     private int mTitleTextSize;
     private int mTitleTextColor;
+    private boolean canScroll;
 
     public BannerView(Context context) {
         this(context, null);
@@ -161,11 +162,6 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
     }
 
     public void setAdapter(@NonNull BannerAdapter adapter) {
-        if (this.mAdapter != null) {
-            this.mAdapter = adapter;
-            mBannerVp.setAdapter(adapter);
-            return;
-        }
         this.mAdapter = adapter;
         mBannerVp.setAdapter(adapter);
         // 初始化点
@@ -174,6 +170,14 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
         initDesc();
         // 事件监听
         handleListener();
+        // 设置banner可否滚动
+        if (!mOneDataScroll && getItemCount() < 2) {
+            canScroll = false;
+            stopAutoRoll();
+        } else {
+            canScroll = true;
+        }
+        mBannerVp.setCanScroll(canScroll);
         startAutoRoll();
     }
 
@@ -201,10 +205,6 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
             if (!mCanTouchToPause) {
                 return false;
             }
-            if (!mOneDataScroll && getItemCount() < 2) {
-                // 设置一个不能滚动并且只有一个 不让其滚动
-                return true;
-            }
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     // 手指按下停止滚动
@@ -227,11 +227,9 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
      * Fragment isVisibleToUser == true 开始
      */
     public void startAutoRoll() {
-        if (!mOneDataScroll && getItemCount() < 2) {
-            // 设置了一个条目不滚动
-            return;
+        if (canScroll) {
+            mBannerVp.startAutoRoll();
         }
-        mBannerVp.startAutoRoll();
     }
 
     private int getItemCount() {
@@ -305,8 +303,12 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
         int realPosition = position % getItemCount();
         Log.e("onSelectedItem", "position = " + position + ", realPosition = " + realPosition);
         if (!mHideIndicator) {
-            mBannerDotContainer.getChildAt(mPrePosition).setSelected(false);
-            mBannerDotContainer.getChildAt(realPosition).setSelected(true);
+            if (mBannerDotContainer.getChildAt(mPrePosition) != null) {
+                mBannerDotContainer.getChildAt(mPrePosition).setSelected(false);
+            }
+            if (mBannerDotContainer.getChildAt(realPosition) != null) {
+                mBannerDotContainer.getChildAt(realPosition).setSelected(true);
+            }
         }
         mBannerTvDesc.setText(mAdapter.getItemDesc(realPosition));
         this.mPrePosition = realPosition;
