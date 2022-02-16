@@ -12,6 +12,7 @@
         <attr name="bv_interval" />
         <attr name="bv_scrollDuration" />
         <attr name="bv_hideBottom" format="boolean" />
+        <attr name="bv_canAutoScroll" format="boolean" />
         <attr name="bv_oneDataScroll" format="boolean" />
         <attr name="bv_hideIndicator" format="boolean" />
         <attr name="bv_canTouchToPause" format="boolean" />
@@ -27,9 +28,9 @@
         <attr name="bv_dotSize" format="dimension" />
         <attr name="bv_dotMargin" format="dimension" />
         <attr name="bv_titleLocation" format="enum">
-            <enum name="bv_left" value="-1" />
-            <enum name="bv_center" value="0" />
-            <enum name="bv_right" value="1" />
+            <enum name="left" value="-1" />
+            <enum name="center" value="0" />
+            <enum name="right" value="1" />
         </attr>
         <attr name="bv_titleTextSize" format="dimension" />
         <attr name="bv_titleTextColor" format="color" />

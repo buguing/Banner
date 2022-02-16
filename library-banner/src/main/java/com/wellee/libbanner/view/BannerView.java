@@ -48,6 +48,10 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
     private boolean mHideBottom;
     private boolean mHideIndicator;
     /**
+     * 是否可以自动轮播 默认true
+     */
+    private boolean mCanAutoScroll;
+    /**
      * 一条数据是否滚动
      */
     private boolean mOneDataScroll = true;
@@ -104,6 +108,7 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.BannerView);
         mHideBottom = array.getBoolean(R.styleable.BannerView_bv_hideBottom, false);
         mHideIndicator = array.getBoolean(R.styleable.BannerView_bv_hideIndicator, false);
+        mCanAutoScroll = array.getBoolean(R.styleable.BannerView_bv_canAutoScroll, true);
         mOneDataScroll = array.getBoolean(R.styleable.BannerView_bv_oneDataScroll, true);
         mCanTouchToPause = array.getBoolean(R.styleable.BannerView_bv_canTouchToPause, true);
         mBottomHeight = array.getDimensionPixelSize(R.styleable.BannerView_bv_bottomHeight, 0);
@@ -227,7 +232,7 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
      * Fragment isVisibleToUser == true 开始
      */
     public void startAutoRoll() {
-        if (canScroll) {
+        if (mCanAutoScroll && canScroll) {
             mBannerVp.startAutoRoll();
         }
     }

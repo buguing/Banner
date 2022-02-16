@@ -12,6 +12,6 @@
     app:bv_dotSize="10dp"
     app:bv_indicatorLocation="right"
     app:bv_interval="2000"
-    app:bv_titleLocation="bv_left"
+    app:bv_titleLocation="left"
     app:bv_titleTextColor="@color/white"
     app:bv_titleTextSize="@dimen/textSize_18" />

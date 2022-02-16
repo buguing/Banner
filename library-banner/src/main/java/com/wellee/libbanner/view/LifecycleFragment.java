@@ -19,37 +19,6 @@ public class LifecycleFragment extends Fragment implements LifecycleOwner {
     LifecycleRegistry mLifecycleRegistry;
 
     @Override
-    public void onAttach(Context context) {
-        Log.d("LifecycleFragment", "onAttach");
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d("LifecycleFragment", "onCreate");
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        Log.d("LifecycleFragment", "onCreateView");
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d("LifecycleFragment", "onActivityCreated");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("LifecycleFragment", "onStart");
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         Log.d("LifecycleFragment", "onResume");
@@ -64,27 +33,9 @@ public class LifecycleFragment extends Fragment implements LifecycleOwner {
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        Log.d("LifecycleFragment", "onStop");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d("LifecycleFragment", "onDestroyView");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d("LifecycleFragment", "onDestroy");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d("LifecycleFragment", "onDetach");
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        Log.d("LifecycleFragment", "onHiddenChanged hidden = " + hidden);
     }
 
     public LifecycleFragment() {
