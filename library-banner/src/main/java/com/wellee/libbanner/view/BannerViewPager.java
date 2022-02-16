@@ -128,12 +128,26 @@ public class BannerViewPager extends ViewPager {
         }
     }
 
-    public void setCanScroll(boolean canScroll) {
-        isCanScroll = canScroll;
+    //设置是否允许滑动，true是可以滑动，false是禁止滑动
+    public void setCanScroll(boolean isCanScroll) {
+        this.isCanScroll = isCanScroll;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        if (isCanScroll) {
+            return super.onTouchEvent(ev);
+        } else {
+            return true;
+        }
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return isCanScroll && super.onInterceptTouchEvent(ev);
+        if (isCanScroll) {
+            return super.onInterceptTouchEvent(ev);
+        } else {
+            return false;
+        }
     }
 }
