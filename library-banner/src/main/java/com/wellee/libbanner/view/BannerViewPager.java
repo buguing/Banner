@@ -99,6 +99,14 @@ public class BannerViewPager extends ViewPager {
 
     }
 
+    public int getInterval() {
+        return mInterval;
+    }
+
+    public void setInterval(int interval) {
+        this.mInterval = interval;
+    }
+
     /**
      * 开始滚动
      */

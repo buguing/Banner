@@ -70,6 +70,7 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
     private int mTitleTextSize;
     private int mTitleTextColor;
     private boolean canScroll;
+    private int mInterval;
 
     public BannerView(Context context) {
         this(context, null);
@@ -185,6 +186,17 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
         }
         mBannerVp.setCanScroll(canScroll);
         startAutoRoll();
+    }
+
+    public int getInterval() {
+        return mInterval;
+    }
+
+    public void setInterval(int interval) {
+        this.mInterval = interval;
+        if (mBannerVp != null) {
+            mBannerVp.setInterval(interval);
+        }
     }
 
     private void handleListener() {
