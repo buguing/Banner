@@ -64,7 +64,7 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
     private int mBottomBgColor;
     private int mIndicatorLocation;
     private int mDotDrawableSelector;
-    private int mDotSize;
+    private int mDotWidth, mDotHeight;
     private int mDotMargin;
     private int mTitleLocation;
     private int mTitleTextSize;
@@ -116,7 +116,8 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
         mBottomBgColor = array.getColor(R.styleable.BannerView_bv_bottomBackgroundColor, ContextCompat.getColor(getContext(), R.color.black));
         mIndicatorLocation = array.getInt(R.styleable.BannerView_bv_indicatorLocation, 1);
         mDotDrawableSelector = array.getResourceId(R.styleable.BannerView_bv_dotDrawableSelector, R.drawable.banner_dot_bg_selector);
-        mDotSize = array.getDimensionPixelSize(R.styleable.BannerView_bv_dotSize, Utils.dp2px(getContext(), 10));
+        mDotWidth = array.getDimensionPixelSize(R.styleable.BannerView_bv_dotWidth, Utils.dp2px(getContext(), 10));
+        mDotHeight = array.getDimensionPixelSize(R.styleable.BannerView_bv_dotHeight, Utils.dp2px(getContext(), 10));
         mDotMargin = array.getDimensionPixelSize(R.styleable.BannerView_bv_dotMargin, Utils.dp2px(getContext(), 5));
         mTitleLocation = array.getInt(R.styleable.BannerView_bv_titleLocation, -1);
         mTitleTextSize = array.getDimensionPixelSize(R.styleable.BannerView_bv_titleTextSize, Utils.sp2px(getContext(), 18));
@@ -277,10 +278,15 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
      * 动态添加指示器
      */
     private void initDotIndicator() {
-        if (!mHideIndicator) {
-            mBannerDotContainer.removeAllViews();
+        mPrePosition = 0;
+        mBannerDotContainer.removeAllViews();
+        boolean isAddIndicator = !mHideIndicator;
+        if (!mOneDataScroll) {
+            isAddIndicator = isAddIndicator && getItemCount() > 1;
+        }
+        if (isAddIndicator) {
             for (int i = 0; i < getItemCount(); i++) {
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mDotSize, mDotSize);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mDotWidth, mDotHeight);
                 params.leftMargin = params.rightMargin = mDotMargin;
                 View dotView = new View(getContext());
                 dotView.setLayoutParams(params);

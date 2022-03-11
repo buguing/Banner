@@ -25,7 +25,8 @@
             <enum name="right" value="1" />
         </attr>
         <attr name="bv_dotDrawableSelector" format="reference" />
-        <attr name="bv_dotSize" format="dimension" />
+        <attr name="bv_dotWidth" format="dimension" />
+        <attr name="bv_dotHeight" format="dimension" />
         <attr name="bv_dotMargin" format="dimension" />
         <attr name="bv_titleLocation" format="enum">
             <enum name="left" value="-1" />
