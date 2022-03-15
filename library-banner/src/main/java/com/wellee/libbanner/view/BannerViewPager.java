@@ -47,8 +47,6 @@ public class BannerViewPager extends ViewPager {
 
     public BannerViewPager(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initAttrs(attrs);
-        setScrollDuration();
         initHandler();
     }
 
@@ -64,7 +62,13 @@ public class BannerViewPager extends ViewPager {
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.BannerViewPager);
         mInterval = array.getInt(R.styleable.BannerViewPager_bv_interval, 2000);
         mScrollDuration = array.getInt(R.styleable.BannerViewPager_bv_scrollDuration, 0);
+        setScrollDuration();
         array.recycle();
+    }
+
+    public void setScrollDuration(int mScrollDuration) {
+        this.mScrollDuration = mScrollDuration;
+        setScrollDuration();
     }
 
     private void setScrollDuration() {
@@ -97,10 +101,6 @@ public class BannerViewPager extends ViewPager {
         mAdapter = adapter;
         setAdapter(new BannerPagerAdapter(mAdapter));
 
-    }
-
-    public int getInterval() {
-        return mInterval;
     }
 
     public void setInterval(int interval) {

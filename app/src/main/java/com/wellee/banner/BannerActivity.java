@@ -59,7 +59,8 @@ public class BannerActivity extends AppCompatActivity {
 
         final List<String> imgs = flag ? images : images1;
         final List<String> des = flag ? descriptions : descriptions1;
-        mBannerView.setInterval(1000);
+        mBannerView.setInterval(3000);
+        mBannerView.setScrollDuration(800);
         mBannerView.setAdapter(new BannerAdapter() {
             @Override
             public View getItemView(int position, View convertView) {

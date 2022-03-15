@@ -70,7 +70,6 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
     private int mTitleTextSize;
     private int mTitleTextColor;
     private boolean canScroll;
-    private int mInterval;
 
     public BannerView(Context context) {
         this(context, null);
@@ -188,18 +187,30 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
         startAutoRoll();
     }
 
-    public int getInterval() {
-        return mInterval;
-    }
-
+    /**
+     * viewpager 自动滚动时间间隔
+     *
+     * @param interval 单位ms
+     */
     public void setInterval(int interval) {
-        this.mInterval = interval;
         if (mBannerVp != null) {
             mBannerVp.setInterval(interval);
         }
     }
 
+    /**
+     * viewpager滚动速率
+     *
+     * @param scrollDuration 单位ms
+     */
+    public void setScrollDuration(int scrollDuration) {
+        if (mBannerVp != null) {
+            mBannerVp.setScrollDuration(scrollDuration);
+        }
+    }
+
     private void handleListener() {
+        mBannerVp.clearOnPageChangeListeners();
         mBannerVp.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
