@@ -19,7 +19,6 @@
         app:bv_indicatorLocation="center"
         app:bv_interval="2000"
         app:bv_oneDataScroll="false"
-        app:bv_scrollDuration="800"
         app:bv_titleLocation="left"
         app:bv_titleTextColor="@color/white"
         app:bv_titleTextSize="@dimen/textSize_18" />

@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -70,6 +71,7 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
     private int mTitleTextSize;
     private int mTitleTextColor;
     private boolean canScroll;
+    private int mCurrentPosition;
 
     public BannerView(Context context) {
         this(context, null);
@@ -170,6 +172,7 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
     public void setAdapter(@NonNull BannerAdapter adapter) {
         this.mAdapter = adapter;
         mBannerVp.setAdapter(adapter);
+        mBannerVp.setCurrentItem(getItemCount());
         // 初始化点
         initDotIndicator();
         // 初始化标题文字
@@ -214,7 +217,23 @@ public class BannerView extends RelativeLayout implements LifecycleObserver {
         mBannerVp.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                onSelectedItem(position);
+                mCurrentPosition = position;
+                onSelectedItem(mCurrentPosition);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                if (state == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    // 手动向前滑动 滑到1或0时 向后切换10个周期
+                    if (getItemCount() > 1) {
+                        if (mCurrentPosition == 1) {
+                            mBannerVp.setCurrentItem(10 * getItemCount() + 1, false);
+                        } else if (mCurrentPosition == 0) {
+                            mBannerVp.setCurrentItem(10 * getItemCount(), false);
+                        }
+                    }
+                }
             }
         });
 

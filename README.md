@@ -15,7 +15,7 @@ allprojects {
         }
 }
 ```
-*   implementation 'com.github.buguing:Banner:v2.1.2'
+*   implementation 'com.github.buguing:Banner:v2.1.3'
 
 ## 使用方法
 *   详见sample

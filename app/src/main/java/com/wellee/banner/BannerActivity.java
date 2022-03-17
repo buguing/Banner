@@ -22,7 +22,7 @@ public class BannerActivity extends AppCompatActivity {
 
     private BannerView mBannerView;
 
-    private boolean flag = true;
+    private boolean flag = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +60,6 @@ public class BannerActivity extends AppCompatActivity {
         final List<String> imgs = flag ? images : images1;
         final List<String> des = flag ? descriptions : descriptions1;
         mBannerView.setInterval(3000);
-        mBannerView.setScrollDuration(800);
         mBannerView.setAdapter(new BannerAdapter() {
             @Override
             public View getItemView(int position, View convertView) {
@@ -76,9 +75,9 @@ public class BannerActivity extends AppCompatActivity {
                         .load(imgs.get(position))
                         .apply(new RequestOptions().placeholder(R.drawable.default_picture))
                         .into(imageView);
-                imageView.setOnClickListener(v -> {
-                    Toast.makeText(BannerActivity.this, "哈哈", Toast.LENGTH_SHORT).show();
-                });
+//                imageView.setOnClickListener(v -> {
+//                    Toast.makeText(BannerActivity.this, "哈哈", Toast.LENGTH_SHORT).show();
+//                });
                 return imageView;
             }
 
